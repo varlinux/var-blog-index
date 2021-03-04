@@ -17,7 +17,6 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
   import DateUtils from "@/utils/DateUtils";
 
   export default {
@@ -28,17 +27,12 @@
       }
     },
     mounted() {
-      this.getAllArticle().then(res => {
+      this.$store.dispatch('article/getAllArticle').then(res => {
         if (res._code === 200) {
           this.articleList = DateUtils.mySort(res._data, 'atc_create_time')
           console.log(`this.articleList : `, this.articleList)
         }
       })
-    },
-    methods: {
-      ...mapActions([
-        'getAllArticle'
-      ])
     }
   }
 </script>

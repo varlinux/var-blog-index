@@ -1,21 +1,17 @@
 @import "@/assets/style/base"
 
-.el-card
+.contact-container 
   position: inherit
   width: 100%
   margin: 0 auto
 
-.el-form .suggest-email
-  width: 30%
-  min-width: 300px
+.contact-form
+  height: 100%
 
-.el-form .suggest-title
-  width: 70%
-  min-width: 300px
-
-.el-form .suggest-content
-  width: 100%
-  min-width: 300px
+.el-form 
+  & .suggest-content, .suggest-title, .suggest-email
+    width: 100%
+    min-width: 300px
 
 /deep/ .el-textarea__inner
   resize: none
@@ -28,5 +24,5 @@
   float: right
 
 @media (min-width: 992px)
-  .el-card
-    width: 48%
+  .contact-container 
+    width: 40%

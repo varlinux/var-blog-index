@@ -2,7 +2,7 @@ import {
   getArtypes
 } from '@/api/sys/artype'
 
-const actions = {
+export const actions = {
   getArtypes({commit} ,data) {
     return new Promise((resolve) => {
       getArtypes(data).then(res => {
@@ -10,9 +10,4 @@ const actions = {
       })
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }

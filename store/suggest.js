@@ -2,7 +2,7 @@ import {
   addSuggest
 } from '@/api/suggest'
 
-const actions = {
+export const actions = {
   addSuggest({commit}, data) {
     return new Promise((resolve, reject) => {
       addSuggest(data).then(res => {
@@ -10,9 +10,4 @@ const actions = {
       })
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }

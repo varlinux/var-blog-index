@@ -1,15 +1,15 @@
 import Cookies from 'js-cookie'
 
-const state = {
+export const state = () => ({
   sidebar: {
     opened: Cookies.get('sidebarStatus') ? !!Cookies.get('sidebarStatus') : false,
     withoutAnimation: false
   },
   device: 'desktop',
   size: Cookies.get('size') || 'medium'
-}
+})
 
-const mutations = {
+export const mutations = {
   TOGGLE_SIDEBAR: state => {
     state.sidebar.opened = !state.sidebar.opened
     state.sidebar.withoutAnimation = false
@@ -33,7 +33,7 @@ const mutations = {
   }
 }
 
-const actions = {
+export const actions = {
   toggleSideBar({ commit }) {
     commit('TOGGLE_SIDEBAR')
   },
@@ -46,10 +46,4 @@ const actions = {
   setSize({ commit }, size) {
     commit('SET_SIZE', size)
   }
-}
-
-export default {
-  state,
-  mutations,
-  actions
 }

@@ -26,7 +26,16 @@ export default {
       return this.$route.path
     }
   },
-  mounted() {
+  watch: {
+    $route: function(to, from) {
+      if(to.path === '/' || from.path === '/') {
+        this.$router.push({
+          path: '/article'
+        })
+      }
+    }
+  },
+  created() {
   },
   methods: {
     reload() {

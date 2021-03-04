@@ -19,9 +19,10 @@
   import Aside from './components/Aside'
   import Footer from './components/Footer'
   import AppMain from "./AppMain";
-  import {mapState, mapActions} from "vuex";
+  import {mapState} from "vuex";
 
   export default {
+    name: 'layout',
     data() {
       return {
         mainStatus: 'articleList'
@@ -39,13 +40,10 @@
       AppMain
     },
     created() {
-      document.body.clientWidth < 960 ? this.$store.dispatch('toggleDevice', 'mobile') :
-          this.$store.dispatch('toggleDevice', 'desktop')
-    },
-    methods: {
-      ...mapActions([
-        'toggleDevice'
-      ])
+      if(process.client) {
+        let deviceWidth = document.body.clientWidth
+        this.$store.dispatch('app/toggleDevice', deviceWidth < 960 ? 'mobile' : 'desktop')
+      }
     }
   }
 </script>

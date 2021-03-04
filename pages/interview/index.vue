@@ -38,7 +38,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getArtypes', {}).then(res => {
+      this.$store.dispatch('sys/artype/getArtypes', {}).then(res => {
         if (res && res._data) {
           const {_data} = res
           this.typeList = _data
@@ -51,7 +51,7 @@
         console.log(`category type : `, type)
         return this.$nextTick(() => {
           this.$router.push({
-            path: '/interviewList',
+            path: '/interview/list',
             query: {
               type: type
             }

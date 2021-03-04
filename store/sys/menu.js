@@ -6,7 +6,7 @@ import {
   getSession
 } from "@/controller/sessionStorage"
 
-const actions = {
+export const actions = {
   getIndexMenu() {
     return new Promise((resolve) => {
       const ml = getSession('menuList')
@@ -25,9 +25,4 @@ const actions = {
       }
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }

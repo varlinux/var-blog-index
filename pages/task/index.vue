@@ -40,7 +40,7 @@
         site_task_type: 1,
         site_task_status: 1
       }
-      this.$store.dispatch('getIndexTask', formData).then(res => {
+      this.$store.dispatch('sys/task/getIndexTask', formData).then(res => {
         if (res._code === 200) {
           this.taskList = DateUtils.mySort(res._data, 'site_task_level', 'reverse')
           console.log(`this.taskList : `, this.taskList)

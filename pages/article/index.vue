@@ -87,7 +87,7 @@
         return arr
       },
       tagMap() {
-        this.$store.dispatch('getAllTag').then(res => {
+        this.$store.dispatch('tag/getAllTag').then(res => {
           if (res) {
             const {_data} = res
             this.articleList.forEach(item => {

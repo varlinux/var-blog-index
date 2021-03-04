@@ -3,7 +3,7 @@ import {
 } from '@/api/sys/task'
 import {json2parameter} from "@/utils/UrlUtils";
 
-const actions = {
+export const actions = {
   getIndexTask({commit}, data) {
     return new Promise((resolve) => {
       return getIndexTask(json2parameter(data)).then(res => {
@@ -11,9 +11,4 @@ const actions = {
       })
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }

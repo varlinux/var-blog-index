@@ -28,17 +28,24 @@
     data() {
       return {
         childCloseAside: 'none',
-        circleUrl: require('../../assets/img/github.png'),
+        circleUrl: 'https://i.postimg.cc/3rvCJnDB/20191218091658.jpg',
+        // circleUrl: require('@/assets/img/github.png'),
         asideWidth: "20%",
-        menuList: [],
+        menuList: [{
+          '_id': 1,
+          'dir_menu_url': 'https://github.com/varlinux/vue-typescript-blog',
+          'dir_menu_name': 'Github'
+        }],
         iconMap: {
-          '/article/list': 'el-icon-files',
+          '/article': 'el-icon-s-home',
           '/tag': 'el-icon-price-tag',
           '/interview': 'el-icon-reading',
-          '/note': 'el-icon-tickets',
+          '/contact': 'el-icon-phone',
           '/timeline': 'el-icon-time',
-          '/task': 'el-icon-location'
-        }
+          '/task': 'el-icon-location',
+          'https://github.com/varlinux/vue-typescript-blog': 'el-icon-link'
+        },
+        staticMenu: []
       }
     },
     computed: {
@@ -49,14 +56,15 @@
     },
     watch: {},
     mounted: function () {
-      console.log(`this.device : `, this.device)
-      this.$store.dispatch('getIndexMenu').then(res => {
-        if (res) {
-          console.log(`res : `, res)
+      this.$store.dispatch('sys/menu/getIndexMenu').then(res => {
+        if (res && res._data) {
+          this.menuList.forEach(item => {
+            res._data.push(item)
+          })
           this.menuList = res._data.filter(item => item.dir_menu_url)
         }
       })
-      this.device.toString() === 'mobile' ? this.asideWidth = '50%' : ''
+      this.device.toString() === 'mobile' ? this.asideWidth = '40%' : ''
     },
     methods: {
       handleOpen() {
@@ -66,6 +74,10 @@
 
       },
       goTo(path) {
+        console.log(path)
+        if (path.toString().indexOf(/^http/)) {
+          return location.href = path
+        }
         return this.$router.push(path)
       },
     },

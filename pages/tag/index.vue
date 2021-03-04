@@ -20,7 +20,6 @@
 </template>
 
 <script>
-  import {mapActions} from 'vuex'
   import ListTemplate from "@/pages/article/components/ListTemplate"
   import LoadingHandler from "@/pages/mixin/LoadingHandler"
   export default {
@@ -37,20 +36,16 @@
     },
     mixins: [LoadingHandler],
     mounted() {
-      this.getAllTag().then(res => {
+      this.$store.dispatch('tag/getAllTag').then(res => {
         if (res._code === 200) {
           this.tagList = res._data
         }
       })
     },
     methods: {
-      ...mapActions([
-        'getAllTag',
-        'getByTagId'
-      ]),
       getArticleByTag(tagId) {
         this.loadingStart(document.querySelector('.loadingStart'))
-        this.getByTagId(tagId).then(data => {
+        this.$store.dispatch('article/getByTagId', tagId).then(data => {
           let { _code, _data, _msg } = data
           if (_code === 200 && _data.length > 0) {
             console.log(`data : `, data)

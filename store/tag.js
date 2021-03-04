@@ -8,7 +8,7 @@ import {
 
 const tagType = ['default', 'success', 'info', 'warning', 'danger']
 
-const actions = {
+export const actions = {
   getAllTag() {
     return new Promise((resolve) => {
       const tags = getSession('tags')
@@ -28,9 +28,4 @@ const actions = {
       }
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }

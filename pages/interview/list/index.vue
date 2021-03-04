@@ -47,7 +47,7 @@
         const formData = {
           atc_type: type
         }
-        return this.$store.dispatch('getByObj', formData).then(res => {
+        return this.$store.dispatch('article/getByObj', formData).then(res => {
           if (res && res._data) {
             const {_data} = res
             this.articleList = _data

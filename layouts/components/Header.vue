@@ -50,7 +50,7 @@
     data() {
       return {
         fit: 'contain',    // fill / contain / cover / none / scale-down
-        url: require("../../assets/img/github.png"),
+        url: require("@/assets/img/github.png"),
         showHeader: true,
         menuList: [],
         state: '',        // 搜索条件,
@@ -70,7 +70,7 @@
       // }
     },
     mounted() {
-      this.$store.dispatch('getIndexMenu').then(res => {
+      this.$store.dispatch('sys/menu/getIndexMenu').then(res => {
         if (res) {
           console.log(`res : `, res)
           this.menuList = res._data.filter(item => item.dir_menu_url).reverse()
@@ -79,13 +79,13 @@
     },
     methods: {
       forwardGithub() {
-        location.href = 'https://github.com/varlinux'
+        location.href = 'https://github.com/varlinux/vue-typescript-blog'
       },
       goTo(path) {
         return this.$router.push(path)
       },
       openSidebar() {
-        this.$store.commit('TOGGLE_SIDEBAR')
+        this.$store.commit('app/TOGGLE_SIDEBAR')
       },
       toggleSearch() {
         this.isShowSearchInput = !this.isShowSearchInput

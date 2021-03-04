@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'app-nuxt-demo',
+    title: 'Var Blog',
     htmlAttrs: {
       lang: 'en'
     },
@@ -17,7 +17,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'element-ui/lib/theme-chalk/index.css'
+    'element-ui/lib/theme-chalk/index.css',
+    '@/assets/style/base.sass'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
@@ -34,7 +35,22 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios'
   ],
+
+  axios: {
+    proxy: true, // 开启代理
+    credentials: true // 表示跨域请求时是否需要凭证
+  },
+
+  proxy: {
+    '/api': {
+      target: process.env.VUE_API_URL,
+      pathRewrite: {
+        changeOrigin: true // 表示是否跨域
+      }
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

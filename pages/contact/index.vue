@@ -1,27 +1,29 @@
 <template>
-  <el-card>
-    <el-form
-        ref="form"
-        :model="form">
-      <h3>当您有更好的想法可以联系博主哦...</h3>
-      <el-form-item class="suggest-email">
-        <el-input v-model="form.contact" placeholder="联系方式"></el-input>
-      </el-form-item>
-      <el-form-item class="suggest-title">
-        <el-input v-model="form.title" placeholder="标题"></el-input>
-      </el-form-item>
-      <el-form-item class="suggest-content">
-        <el-input type="textarea" v-model="form.content" placeholder="这里填写你想要说的话..."></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">提交</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
+  <div class="contact-container">
+    <el-card>
+      <el-form
+          ref="form"
+          :model="form">
+        <h3>当您有更好的想法可以联系博主哦...</h3>
+        <el-form-item class="suggest-email">
+          <el-input v-model="form.contact" placeholder="联系方式"></el-input>
+        </el-form-item>
+        <el-form-item class="suggest-title">
+          <el-input v-model="form.title" placeholder="标题"></el-input>
+        </el-form-item>
+        <el-form-item class="suggest-content">
+          <el-input type="textarea" v-model="form.content" placeholder="这里填写你想要说的话..."></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="onSubmit">提交</el-button>
+        </el-form-item>
+      </el-form>
+    </el-card>
+  </div>
 </template>
 
 <script>
-  import {mapActions, mapState} from 'vuex'
+  import {mapState} from 'vuex'
 
   export default {
     name: "EmailNote",
@@ -34,6 +36,8 @@
         }
       }
     },
+    components: {
+    },
     computed: {
       ...mapState({
         device: state => state.app.device
@@ -42,12 +46,9 @@
     mounted() {
     },
     methods: {
-      ...mapActions([
-        'addSuggest'
-      ]),
       onSubmit() {
         let _this = this
-        this.addSuggest(_this.form).then(res => {
+        this.$store.dispatch('suggest/addSuggest', _this.form).then(res => {
           let popType = 'error',
             popInfo = '失败'
           if (res._code === 200) {

@@ -6,7 +6,7 @@ import {
 } from '@/api/article'
 import {json2parameter} from '@/utils/UrlUtils'
 
-const actions = {
+export const actions = {
   getAllArticle() {
     return new Promise((resolve) => {
       return getAll().then(res => {
@@ -35,9 +35,4 @@ const actions = {
       })
     })
   }
-}
-
-export default {
-  // namespaced: true,
-  actions: actions
 }
