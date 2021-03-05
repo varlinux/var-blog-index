@@ -7,7 +7,15 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
-    "test": "jest"
+    "test": "jest",
+    "deploy:prod": "cross-env NODE_ENV=prod node ./deploy",
+    "deploy:test": "cross-env NODE_ENV=test node ./deploy"
+  },
+  "config": {
+    "nuxt": {
+        "host": "0.0.0.0",
+        "port": "3333"
+    }
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
@@ -22,9 +30,16 @@
     "@vue/test-utils": "^1.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.6.3",
+    "chalk": "^4.1.0",
+    "compressing": "^1.5.1",
+    "cross-env": "^7.0.3",
     "jest": "^26.6.3",
     "node-sass": "^5.0.0",
+    "ora": "^5.3.0",
+    "pump": "^3.0.0",
     "sass-loader": "^10.1.1",
+    "scp2": "^0.5.0",
+    "ssh2": "^0.8.9",
     "vue-jest": "^3.0.4"
   }
 }

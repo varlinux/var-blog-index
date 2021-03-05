@@ -18,3 +18,7 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+
+## Deploy
+pm2 start npm -- run start
