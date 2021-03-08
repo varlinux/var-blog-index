@@ -1,15 +1,15 @@
 #!/bin/bash
 # 部署环境脚本
-
+version=12.16.2
 # 安装node环境
-wget https://npm.taobao.org/mirrors/node/v14.15.4/node-v14.15.4-linux-x64.tar.xz
-tar -xf node-v14.15.4-linux-x64.tar.xz
+wget https://npm.taobao.org/mirrors/node/v${version}/node-v${version}-linux-x64.tar.xz
+tar -xf node-v${version}-linux-x64.tar.xz
 mkdir /usr/local/node
-mv node-v14.15.4-linux-x64/ /usr/local/node/
+mv node-v${version}-linux-x64/ /usr/local/node/
 
 # 配置系统全局变量
-ln -s /usr/local/node/node-v14.15.4-linux-x64/bin/node /usr/bin/node
-ln -s /usr/local/node/node-v14.15.4-linux-x64/bin/npm /usr/bin/npm
+ln -s /usr/local/node/node-v${version}-linux-x64/bin/node /usr/bin/node
+ln -s /usr/local/node/node-v${version}-linux-x64/bin/npm /usr/bin/npm
 
 # 自定义node，npm安装文件目录
 mkdir /usr/local/node/node_global

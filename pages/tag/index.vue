@@ -21,7 +21,7 @@
 
 <script>
   import ListTemplate from "@/pages/article/components/ListTemplate"
-  import LoadingHandler from "@/pages/mixin/LoadingHandler"
+  import LoadingHandler from "@/middleware/mixin/LoadingHandler"
   export default {
     data() {
       return {

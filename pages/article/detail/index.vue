@@ -55,24 +55,32 @@
     },
     watch: {
       $route(to, from) {
-        this.refreshDetail()
+        this.getDetail()
       }
     },
     mounted() {
-      this.refreshDetail()
+      this.getDetail()
     },
     methods: {
       goBack() {
         return this.$router.go(-1)
       },
-      refreshDetail() {
-        this.detail = this.$route.query
-        if (this.detail.atc_content) {
-          const result = md.render(this.detail.atc_content)
-          md.disable('table')
-          md.renderer.rules.code_block = md.renderer.rules.fence
-          this.$refs.atc_content.innerHTML = result
+      getDetail() {
+        const formData = {
+          atc_id: this.$route.query.atc_id
         }
+        this.$store.dispatch('article/getByObj', formData).then(res => {
+          if(res && res._data) {
+            this.detail = res._data[0]
+
+            if (this.detail.atc_content) {
+              const result = md.render(this.detail.atc_content)
+              md.disable('table')
+              md.renderer.rules.code_block = md.renderer.rules.fence
+              this.$refs.atc_content.innerHTML = result
+            }
+          }
+        })
       }
     },
     directives: {}

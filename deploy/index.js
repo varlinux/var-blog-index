@@ -8,7 +8,7 @@ const compressing = require('compressing')
 ssh2.on('ready', function() {
   console.log(chalk.green(`远程服务器连接成功....`))
   ssh2.shell(function(err, stream) {
-    const cmd = `rm -rf ${server.path}/.nuxt \nexit\n`
+    const cmd = `rm -rf ${server.path} \nexit\n`
     if (err) {
       console.log(chalk.red(`远程服务器连接失败....`))
       throw err

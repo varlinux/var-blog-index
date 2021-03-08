@@ -28,7 +28,7 @@ export default {
   },
   watch: {
     $route: function(to, from) {
-      if(to.path === '/' || from.path === '/') {
+      if(!to.path || !from.path || to.path === '/' || from.path === '/') {
         this.$router.push({
           path: '/article'
         })

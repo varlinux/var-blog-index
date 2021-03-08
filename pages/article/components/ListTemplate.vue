@@ -64,8 +64,10 @@
       getDetail: function (data) {
         console.log(`data : `, data)
         this.$router.push({
-          path: '/article/details',
-          query: data
+          path: '/article/detail',
+          query: {
+            atc_id: data.atc_id
+          }
         })
       },
       appendImg(arr) {
