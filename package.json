@@ -3,23 +3,24 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate",
+    "dev": "cross-env NODE_ENV=dev nuxt",
+    "build": "cross-env NODE_ENV=prod nuxt build",
+    "start": "cross-env NODE_ENV=prod nuxt start",
+    "generate": "cross-env NODE_ENV=prod nuxt generate",
     "test": "jest",
     "deploy:prod": "cross-env NODE_ENV=prod node ./deploy",
-    "deploy:test": "cross-env NODE_ENV=test node ./deploy"
+    "deploy:test": "cross-env NODE_ENV=dev node ./deploy"
   },
   "config": {
     "nuxt": {
       "host": "0.0.0.0",
-      "port": "3333"
+      "port": "9000"
     }
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.1",
     "core-js": "^3.8.3",
+    "custom-env": "^2.0.1",
     "element-ui": "^2.15.0",
     "highlight.js": "^10.6.0",
     "js-cookie": "^2.2.1",
