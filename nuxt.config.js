@@ -1,9 +1,10 @@
 if (process.env.NODE_ENV === 'prod') {
   require('custom-env').env('prod')
+} else if (process.env.NODE_ENV === 'test') {
+  require('custom-env').env('test')
 } else {
   require('custom-env').env('dev')
 }
-console.log(`env : `, process.env.VUE_API_URL)
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
