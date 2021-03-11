@@ -53,7 +53,7 @@ export default {
 
   proxy: {
     '/api': {
-      target: process.env.VUE_API_URL,
+      target: process.env.API_URL || 'http://localhost:3000',
       pathRewrite: {
         changeOrigin: true // 表示是否跨域
       }
