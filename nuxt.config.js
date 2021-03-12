@@ -26,12 +26,20 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    '@toast-ui/editor/dist/toastui-editor.css', // Editor's Style
+    '@toast-ui/editor/dist/toastui-editor-viewer.css', // Editor's Style
+    'codemirror/lib/codemirror.css', // Editor's Dependency Style
     '@/assets/style/base.sass'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/route'
+    // {
+    //   src: '@/plugins/toast-ui',
+    //   mode: 'client'
+    // },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

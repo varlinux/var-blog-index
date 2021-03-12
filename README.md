@@ -21,4 +21,9 @@ For detailed explanation on how things work, check out [Nuxt.js docs](https://nu
 
 
 ## Deploy server then start
-pm2 start npm -- run start
+
+pm2 start yarn --name index -- run start:prod
+
+`or`
+
+pm2 start yarn --name index -- run start:test

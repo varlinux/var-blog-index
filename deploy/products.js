@@ -6,14 +6,14 @@ const envFile = process.env.NODE_ENV === 'prod' ? './.env.prod' : './.env.dev'
 const envPath = path.resolve(__dirname, envFile)
 // env对象
 const envObj = parse(fs.readFileSync(envPath, 'utf8'))
-const SERVER_ID = parseInt(envObj['VUE_APP_SERVER_ID'])
+const SERVER_ID = parseInt(envObj.VUE_APP_SERVER_ID)
 
 function parse (src) {
   // 解析KEY=VAL的文件
   const res = {}
   src.split('\n').forEach(line => {
     // matching "KEY' and 'VAL' in 'KEY=VAL'
-    const keyValueArr = line.match(/^\s*([\w\.\-]+)\s*=\s*(.*)?\s*$/)
+    const keyValueArr = line.match(/^\s*([\w.-]+)\s*=\s*(.*)?\s*$/)
     // matched?
     if (keyValueArr != null) {
       const key = keyValueArr[1]
@@ -38,23 +38,23 @@ const SERVER_LIST = [
   {
     id: 0,
     name: '测试环境',
-    host: envObj['VUE_SERVER_HOST'],
-    port: envObj['VUE_SERVER_PORT'],
-    username: envObj['VUE_SERVER_USERNAME'],
-    password: envObj['VUE_SERVER_PASSWORD'],
-    path: envObj['VUE_SERVER_PATH'],
-    assetsPath: envObj['VUE_SERVER_ASSETS_PATH'],
+    host: envObj.VUE_SERVER_HOST,
+    port: envObj.VUE_SERVER_PORT,
+    username: envObj.VUE_SERVER_USERNAME,
+    password: envObj.VUE_SERVER_PASSWORD,
+    path: envObj.VUE_SERVER_PATH,
+    assetsPath: envObj.VUE_SERVER_ASSETS_PATH
   },
   {
     id: 1,
     name: '生产环境',
-    host: envObj['VUE_SERVER_HOST'],
-    port: envObj['VUE_SERVER_PORT'],
-    username: envObj['VUE_SERVER_USERNAME'],
-    password: envObj['VUE_SERVER_PASSWORD'],
-    path: envObj['VUE_SERVER_PATH'],
-    assetsPath: envObj['VUE_SERVER_ASSETS_PATH'],
-  },
+    host: envObj.VUE_SERVER_HOST,
+    port: envObj.VUE_SERVER_PORT,
+    username: envObj.VUE_SERVER_USERNAME,
+    password: envObj.VUE_SERVER_PASSWORD,
+    path: envObj.VUE_SERVER_PATH,
+    assetsPath: envObj.VUE_SERVER_ASSETS_PATH
+  }
 ]
 
 module.exports = SERVER_LIST[SERVER_ID]

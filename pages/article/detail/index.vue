@@ -18,77 +18,50 @@
           <span class="el-icon-user-solid">{{ detail.atc_author}}</span>
         </div>
       </div>
-<!--      todo markdown内容美化-->
-      <div ref="atc_content" class="detail-con-main">
-      </div>
+      <md-viewer  ref='content'
+                  :viewerText='detail.atc_content' />
     </el-card>
   </div>
 </template>
 
 <script>
-  const hljs = require('highlight.js') // https://highlightjs.org/
-  // Actual default values
-  const md = require('markdown-it')({
-    html: true,
-    typographer: true,
-    highlight: function (str, lang) {
-      if (lang && hljs.getLanguage(lang)) {
-        try {
-          return hljs.highlight(lang, str).value;
-        } catch (__) {}
-      } else {
-        try {
-          return hljs.highlightAuto(str).value;
-        } catch (__) {}
-      }
-      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
-    },
-    linkify: true,
-  });
-  export default {
-    data() {
-      return {
-        isStart: false,
-        list: [],
-        detail: {}
-      }
-    },
-    watch: {
-      $route(to, from) {
-        this.getDetail()
-      }
-    },
-    mounted() {
-      this.getDetail()
-    },
-    methods: {
-      goBack() {
-        return this.$router.go(-1)
-      },
-      getDetail() {
-        const formData = {
-          atc_id: this.$route.query.atc_id
-        }
-        this.$store.dispatch('article/getByObj', formData).then(res => {
-          if(res && res._data) {
-            this.detail = res._data[0]
+import MdViewer from '../components/MdViewer'
 
-            if (this.detail.atc_content) {
-              const result = md.render(this.detail.atc_content)
-              md.disable('table')
-              md.renderer.rules.code_block = md.renderer.rules.fence
-              this.$refs.atc_content.innerHTML = result
-            }
-          }
-        })
-      }
+export default {
+  data() {
+    return {
+      isStart: false,
+      list: [],
+      detail: {},
+    }
+  },
+  components: {
+    MdViewer
+  },
+  watch: {
+  },
+  mounted() {
+    this.getDetail()
+  },
+  methods: {
+    goBack() {
+      return this.$router.push('/article')
     },
-    directives: {}
-  }
+    getDetail() {
+      const formData = {
+        atc_id: this.$route.query.atc_id
+      }
+      this.$store.dispatch('article/getByObj', formData).then(res => {
+        if(res && res._data) {
+          this.detail = res._data[0]
+        }
+      })
+    }
+  },
+  directives: {}
+}
 </script>
 
 <style scoped lang="sass">
-  @import "~@/assets/style/views/article/detail"
-  /*/deep/ p*/
-  /*  color: #000*/
+@import "~@/assets/style/views/article/detail"
 </style>
