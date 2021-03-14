@@ -1,33 +1,90 @@
 <template>
   <el-card>
-    <el-image
-        :src="item.art_type_img_url">
-      <div slot="placeholder" class="image-slot">
-        加载中<span class="dot">...</span>
+    <div @click="handleClick">
+      <el-image class="bgs-60" :src="currentImg"></el-image>
+      <div
+        class="article-simple-content display-f flex-direction-c justify-content-sb"
+      >
+        <div>
+          <el-tag
+            v-for="tag in currentTags"
+            :type="tag.tag_color"
+            :key="tag.tag_id"
+          >
+            {{ tag.tag_name }}
+          </el-tag>
+        </div>
+        <div>
+          <p class="line-limit-length font-1">{{ item.atc_title }}</p>
+          <div class="line-limit-length font-0-6 color-a7a7a7">
+            <i class="el-icon-timer"></i>
+            <span>发布于：{{ publicDate }} 前</span>
+          </div>
+        </div>
       </div>
-    </el-image>
-    <h4 class="demonstration">{{item.art_type_name}}</h4>
-    <p class="demonstration font-0-8">{{item.art_type_desc}}</p>
-    <div class="container-time-scope">
-      <span class="demonstration color-a7a7a7 font-0-6">{{item.art_type_create_time}}</span>
-      <span class="font-0-8 color-e6e6e6 margin-l-r-1">至</span>
-      <span class="demonstration color-a7a7a7 font-0-6">{{item.art_type_edit_time}}</span>
     </div>
   </el-card>
 </template>
 
 <script>
-  export default {
-    name: "index",
-    props: {
-      item: {
-        type: Object,
-        default: {}
+import DateUtils from "@/utils/DateUtils";
+export default {
+  name: "index",
+  props: {
+    item: {
+      type: Object,
+      default: {},
+    },
+    tagList: {
+      type: Array,
+      default: [],
+    },
+  },
+  computed: {
+    currentTags: function () {
+      return (tagIds) => {
+        if (tagIds) {
+          const ids = item.tag_ids.split(",");
+          return mapArray(ids, tagList);
+        }
+      };
+    },
+    currentImg: function () {
+      let imgIsExist,
+        imgReg = /!\[.*]\(.*\)/g,
+        defaultImg =
+          "https://www.whatsappimages.in/wp-content/uploads/2020/06/Sad-Images-13.jpg";
+      if (this.item.toString() !== "{}") {
+        imgIsExist = this.item.atc_content.match(imgReg);
+        return !imgIsExist
+          ? defaultImg
+          : imgIsExist[0].slice(
+              imgIsExist[0].indexOf("http" || "https"),
+              imgIsExist[0].length - 1
+            );
       }
-    }
-  }
+    },
+    publicDate: function () {
+      // const date = new Date().getTime() - new Date(this.item.atc_edit_time || this.item.atc_create_time).getTime()
+      return DateUtils.autoFormatTimeStamp(
+        this.item.atc_edit_time || this.item.atc_create_time
+      );
+    },
+  },
+  methods: {
+    handleClick() {
+      console.log(`click`, this.item);
+      return this.$router.push({
+        path: "/article/detail",
+        query: {
+          atc_id: this.item.atc_id,
+        },
+      });
+    },
+  },
+};
 </script>
 
 <style scoped lang="sass">
-  @import "~@/assets/style/components/PanelCard"
+@import "~@/assets/style/components/PanelCard"
 </style>

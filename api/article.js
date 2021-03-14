@@ -37,3 +37,10 @@ export function getByLimit(data) {
         method: 'get'
     })
 }
+
+export function getOrderByLimit(data) {
+    return request({
+        url: '/api/atcs/getOrderByLimit?' + data,
+        method: 'get'
+    })
+}

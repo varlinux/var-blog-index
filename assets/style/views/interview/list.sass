@@ -1,5 +1,18 @@
 @import "@/assets/style/base"
 
+.list-container
+  display: grid
+  margin: 0 auto
+
 .el-button
   border: 0
   background-color: rgba(0, 0, 0, 0)
+
+@media ( min-width: $base-mobile-width )
+
+  .list-container
+    width: 70%
+
+  .list-template-main
+    grid-template-columns: repeat(3, tuao)
+  

@@ -3,10 +3,18 @@
 .inline_block
   display: inline-block
 
-.list-content
+.app-container
   width: 100%
   margin: 0 auto
+
+.app-container h1
+  padding-left: 1rem
+  border-left: 0.5rem solid $base-title1-color
+
+.list-content
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+  display: grid
+  grid-gap: 1rem
 
 .el-card
   margin-top: 0.5rem
@@ -23,7 +31,6 @@
 
 /deep/ .el-card__body
   font-size: 0.8rem
-  height: 15rem
 
 .article-simple-content
   height: calc(100% - 8rem)
@@ -63,14 +70,6 @@
   height: 6rem
   width: 8rem
 
-.list-template-container
-  width: 100%
-  margin: auto
-
-.list-template-main
-  display: grid
-  grid-gap: 1rem
-
 @media (min-width: $base-mobile-width)
   .el-card
     margin-top: 1rem
@@ -79,8 +78,8 @@
     box-shadow: 0 0 10px 0 rgba(22, 115, 255, 0.13)
     transform: scale(1.05)
 
-  .list-template-container
+  .app-container
     width: 70%
 
-  .list-template-main
+  .list-content
     grid-template-columns: repeat(3, auto)

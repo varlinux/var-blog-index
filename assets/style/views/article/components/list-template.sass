@@ -1,0 +1,15 @@
+@import "@/assets/style/base"
+
+.list-template-main
+  display: grid
+
+.el-card
+  margin: 0.5rem
+  border: 0
+
+.el-image
+  height: 12rem
+
+@media (min-width: $base-mobile-width)
+  .list-template-main
+    grid-template-columns: repeat(3, auto)

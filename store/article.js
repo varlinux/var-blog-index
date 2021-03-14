@@ -2,6 +2,7 @@ import {
   getAll,
   getByTagId,
   getByLimit,
+  getOrderByLimit,
   get
 } from '@/api/article'
 import {json2parameter} from '@/utils/UrlUtils'
@@ -24,6 +25,13 @@ export const actions = {
   getByLimit({commit}, data) {
     return new Promise(resolve => {
       return getByLimit(json2parameter(data)).then(res => {
+        resolve(res)
+      })
+    })
+  },
+  getOrderByLimit({commit}, data) {
+    return new Promise(resolve => {
+      return getOrderByLimit(json2parameter(data)).then(res => {
         resolve(res)
       })
     })

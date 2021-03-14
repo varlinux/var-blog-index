@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="list-container">
     <list-template :item-list="articleList" :loading="false">
       <el-button icon="el-icon-d-arrow-left" @click="goBack">返回</el-button>
     </list-template>
@@ -22,6 +22,7 @@
     watch: {
       $route(to, from) {
         if (to.name === 'InterviewList') {
+          console.log(`sadfasfd`)
           this.reload()
         }
       }

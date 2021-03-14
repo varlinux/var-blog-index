@@ -1,19 +1,22 @@
 @import "../base"
 
 .el-card
-  margin: 0.1rem 0
+  margin-top: 0.5rem
+  cursor: pointer
+  border: 0
 
 .el-image
-  cursor: pointer
-  width: 100%
+  width: auto
+  height: 12rem
   text-align: center
+  position: inherit
 
-/deep/ .el-image__inner
-  width: 60%
+.el-icon-timer
+  margin: 0 0.5rem
 
 @media (min-width: $base-mobile-width)
   .el-card
-    margin: 1rem 3rem 1rem
+    margin-top: 1rem
 
   .el-card:hover
     box-shadow: 0 0 10px 0 rgba(22, 115, 255, 0.13)
