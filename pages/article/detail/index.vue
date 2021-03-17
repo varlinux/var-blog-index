@@ -16,12 +16,13 @@
         <span class="el-icon-user-solid">作者：{{ detail.atc_author }}</span>
       </div>
     </div>
-    <md-viewer ref="content" :viewerText="detail.atc_content" />
+    <md-viewer ref="content" :viewerText="transContent(detail.atc_content)" />
   </div>
 </template>
 
 <script>
 import MdViewer from "../components/MdViewer";
+import {reverseTrans} from '@/utils/CharacterUtils';
 
 export default {
   inject: ['reload'],
@@ -36,6 +37,9 @@ export default {
   },
   components: {
     MdViewer,
+  },
+  computed: {
+    transContent: () => content => reverseTrans(content)
   },
   watch: {
     $route: function (to, from) {
@@ -85,7 +89,8 @@ export default {
       };
       this.$store.dispatch("article/getByObj", formData).then((res) => {
         if (res && res._data) {
-          this.detail = res._data[0];
+          const {_data}  = res
+          this.detail = _data[0]
         }
       });
     },

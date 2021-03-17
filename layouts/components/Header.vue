@@ -50,6 +50,7 @@
     data() {
       return {
         fit: 'contain',    // fill / contain / cover / none / scale-down
+        // url: 'https://i.postimg.cc/3rvCJnDB/20191218091658.jpg',
         url: require("@/assets/img/github.png"),
         showHeader: true,
         menuList: [],

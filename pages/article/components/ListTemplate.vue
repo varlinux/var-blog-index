@@ -38,6 +38,7 @@
 <script>
 import PanelCard from "@/components/PanelCard";
 import DateUtils from "@/utils/DateUtils";
+import ImgConfig from "@/config/ImgConfig";
 
 export default {
   name: "index",
@@ -52,29 +53,21 @@ export default {
     },
   },
   computed: {
-    publicDate: function () {
-      // const date = new Date().getTime() - new Date(this.item.atc_edit_time || this.item.atc_create_time).getTime()
-      return (item) => {
-        return DateUtils.autoFormatTimeStamp(
-          item.atc_edit_time || item.atc_create_time
-        );
-      };
-    },
+    publicDate: () => item => DateUtils.autoFormatTimeStamp(item.atc_edit_time || item.atc_create_time)
   },
   components: {
     PanelCard,
   },
   watch: {
-    itemList: async function () {
-      await this.appendImg(this.itemList);
+    itemList: function () {
+      return this.appendImg(this.itemList);
     },
   },
   mounted() {
-    // this.triggerLoading(document.querySelector(".list-template-loading"));
+    this.triggerLoading(document.querySelector(".list-template-loading"));
   },
   methods: {
     getDetail: function (data) {
-      console.log(`data : `, data);
       this.$router.push({
         path: "/article/detail",
         query: {
@@ -88,7 +81,7 @@ export default {
       arr.forEach((item) => {
         imgIsExist = item.atc_content.match(imgReg);
         item.first_img = !imgIsExist
-          ? "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1033744486,3975974304&fm=26&gp=0.jpg"
+          ? ImgConfig.headPortrait
           : imgIsExist[0].slice(
               imgIsExist[0].indexOf("http"),
               imgIsExist[0].length - 1
@@ -98,21 +91,23 @@ export default {
       console.log(`this.appendImg : `, arr);
       return arr;
     },
-    // triggerLoading(ele) {
-    //   let timer = null, // 节流定时器
-    //     time = 1; // 3s触发一次
-    //   const intersectionObserver = new IntersectionObserver((entries) => {
-    //     if (entries[0].intersectionRatio <= 0) return;
-    //     if (timer) {
-    //       clearTimeout(timer);
-    //     }
-    //     timer = setTimeout(() => {
-    //       this.$emit("trigger-loading", true);
-    //       console.log(`Loaded new items`);
-    //     }, time * 1000);
-    //   });
-    //   intersectionObserver.observe(ele);
-    // },
+    triggerLoading(ele) {
+      let timer = null, // 节流定时器
+        time = 3; // 3s触发一次
+      const intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0].intersectionRatio <= 0) {
+          console.log(entries[0].intersectionRatio)
+          return
+        }
+        if (timer) {
+          clearTimeout(timer);
+        }
+        timer = setTimeout(() => {
+          this.$emit("trigger-loading", true);
+        }, time * 1000);
+      });
+      intersectionObserver.observe(ele);
+    },
   },
 };
 </script>

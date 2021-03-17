@@ -13,7 +13,8 @@ export default {
   name: "AppMain",
   provide: function() {
     return {
-      reload: this.reload
+      reload: this.reload,
+      goTo: this.goTo
     }
   },
   data: function() {
@@ -43,6 +44,9 @@ export default {
       this.$nextTick(() => {
         this.isRouterAlive = true
       })
+    },
+    goTo(url) {
+      return this.$router.push(url)
     }
   }
 }

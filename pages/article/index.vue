@@ -1,6 +1,12 @@
 <template>
   <div class="app-container">
-    <h1>最新文章</h1>
+    <div class="justify-content-sb display-f">
+      <h1 class="display-ib" >最新文章</h1>
+      <el-link @click="goTo('/article/list')" target="_blank">
+        <span>更多</span>
+        <i class="el-icon-d-arrow-right"></i>
+      </el-link>
+    </div>
     <div class="list-content" v-if="articleList.length > 0">
       <PanelCard
         v-for="item in articleList"
@@ -21,6 +27,7 @@ import PanelCard from "@/components/PanelCard";
 
 export default {
   name: "ArticleList",
+  inject: ['reload', 'goTo'],
   data() {
     return {
       articleList: [],

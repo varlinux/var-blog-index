@@ -1,15 +1,14 @@
 @import "@/assets/style/base"
 
+.el-button
+  border: 0
+
 .inline_block
   display: inline-block
 
-.app-container
+.list-container
   width: 100%
   margin: 0 auto
-
-.app-container h1
-  padding-left: 1rem
-  border-left: 0.5rem solid $base-title1-color
 
 .list-content
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
@@ -52,6 +51,18 @@
 .main-data-edit
   display: inline
 
+.loading-container
+  width: 100%
+  display: flex
+  justify-content: center
+  margin-top: 0.5rem
+
+.list-template-loading
+  background-image: url(~@/assets/gif/loading-blue.gif)
+  background-size: 8rem 6rem
+  height: 6rem
+  width: 8rem
+
 @media (min-width: $base-mobile-width)
   .el-card
     margin-top: 1rem
@@ -60,7 +71,7 @@
     box-shadow: 0 0 10px 0 rgba(22, 115, 255, 0.13)
     transform: scale(1.05)
 
-  .app-container
+  .list-container
     width: 70%
 
   .list-content

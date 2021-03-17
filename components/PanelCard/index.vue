@@ -28,6 +28,7 @@
 
 <script>
 import DateUtils from "@/utils/DateUtils";
+import ImgConfig from "@/config/ImgConfig";
 export default {
   name: "index",
   props: {
@@ -52,8 +53,7 @@ export default {
     currentImg: function () {
       let imgIsExist,
         imgReg = /!\[.*]\(.*\)/g,
-        defaultImg =
-          "https://www.whatsappimages.in/wp-content/uploads/2020/06/Sad-Images-13.jpg";
+        defaultImg = ImgConfig.headPortrait;
       if (this.item.toString() !== "{}") {
         imgIsExist = this.item.atc_content.match(imgReg);
         return !imgIsExist
