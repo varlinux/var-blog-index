@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="justify-content-sb display-f">
-      <h1 class="display-ib" >最新文章</h1>
+      <h1 class="display-ib">最新文章</h1>
       <el-link @click="goTo('/article/list')" target="_blank">
         <span>更多</span>
         <i class="el-icon-d-arrow-right"></i>
@@ -27,20 +27,20 @@ import PanelCard from "@/components/PanelCard";
 
 export default {
   name: "ArticleList",
-  inject: ['reload', 'goTo'],
+  inject: ["reload", "goTo"],
   data() {
     return {
       articleList: [],
       tagList: [],
       pageIndex: 0,
       size: 9,
-      loading: true,
+      loading: true
     };
   },
   components: {
-    PanelCard,
+    PanelCard
   },
-  created: function () {
+  created: function() {
     this.selectArticles();
   },
   methods: {
@@ -48,45 +48,29 @@ export default {
       const formData = {
         pageIndex: this.pageIndex,
         size: this.size,
-        order: "desc",
+        order: "desc"
       };
       this.$store
         .dispatch("article/getOrderByLimit", formData)
-        .then(async (res) => {
+        .then(async res => {
           // 前台文章列表展示一般不会发生变化，所以放在created生命周期里面
           if (res) {
             const { _code, _data } = res;
             if (_code === 200) {
               this.articleList = _data;
-              //   if (_data.length <= 0) {
-              //     this.$message({
-              //       type: "warning",
-              //       message: "加载不出来更多的文章了！",
-              //     });
-              //     this.loading = false;
-              //   }
-              //   if (this.articleList.length > 0) {
-              //     console.log(`if this.articleList : `, this.articleList);
-              //     this.articleList = Array.from(this.articleList).concat(
-              //       Array.from(_data)
-              //     );
-              //   } else {
-              //     this.articleList = _data;
-              //   }
-              //   this.pageIndex++;
             }
           }
         });
     },
     selectTags() {
-      this.$store.dispatch("tag/getAllTag").then((res) => {
+      this.$store.dispatch("tag/getAllTag").then(res => {
         if (res && res._data) {
           const { _data } = res;
           this.tagList = _data;
         }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -1602,7 +1602,7 @@
 
 "@types/tern@*":
   version "0.23.3"
-  resolved "https://registry.npm.taobao.org/@types/tern/download/@types/tern-0.23.3.tgz?cache=0&sync_timestamp=1613384976260&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Ftern%2Fdownload%2F%40types%2Ftern-0.23.3.tgz#4b54538f04a88c9ff79de1f6f94f575a7f339460"
+  resolved "https://registry.npm.taobao.org/@types/tern/download/@types/tern-0.23.3.tgz?cache=0&sync_timestamp=1613385106498&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Ftern%2Fdownload%2F%40types%2Ftern-0.23.3.tgz#4b54538f04a88c9ff79de1f6f94f575a7f339460"
   integrity sha1-S1RTjwSojJ/3neH2+U9XWn8zlGA=
   dependencies:
     "@types/estree" "*"
@@ -3119,7 +3119,7 @@ code-point-at@^1.0.0:
 
 codemirror@^5.48.4:
   version "5.59.4"
-  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.59.4.tgz?cache=0&sync_timestamp=1614162503729&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcodemirror%2Fdownload%2Fcodemirror-5.59.4.tgz#bfc11c8ce32b04818e8d661bbd790a94f4b3a6f3"
+  resolved "https://registry.npm.taobao.org/codemirror/download/codemirror-5.59.4.tgz?cache=0&sync_timestamp=1614162309938&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcodemirror%2Fdownload%2Fcodemirror-5.59.4.tgz#bfc11c8ce32b04818e8d661bbd790a94f4b3a6f3"
   integrity sha1-v8EcjOMrBIGOjWYbvXkKlPSzpvM=
 
 collect-v8-coverage@^1.0.0:
@@ -5097,6 +5097,11 @@ hex-color-regex@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npm.taobao.org/hex-color-regex/download/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha1-TAb8y0YC/iYCs8k9+C1+fb8aio4=
+
+highlight.js@^10.6.0:
+  version "10.6.0"
+  resolved "https://registry.npm.taobao.org/highlight.js/download/highlight.js-10.6.0.tgz#0073aa71d566906965ba6e1b7be7b2682f5e18b6"
+  integrity sha1-AHOqcdVmkGllum4be+eyaC9eGLY=
 
 hmac-drbg@^1.0.1:
   version "1.0.1"

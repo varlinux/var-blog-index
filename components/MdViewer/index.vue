@@ -4,8 +4,8 @@
           height="500px" />
 </template>
 <script>
-  import { Viewer } from '@toast-ui/vue-editor'
-
+  import Vue from 'vue'
+  const Viewer = Vue.component('Viewer')
   export default {
     name: 'index',
     data() {

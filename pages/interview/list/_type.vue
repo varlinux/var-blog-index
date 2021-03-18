@@ -13,9 +13,9 @@
         ></PanelCard>
       </div>
     </div>
-    <div class="loading-container">
+    <!-- <div class="loading-container">
       <div v-show="loading" class="list-template-loading"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -42,40 +42,25 @@ export default {
     PanelCard
   },
   mounted() {
-    this.triggerLoading(document.querySelector(".list-template-loading"));
+    const { params } = this.$route;
+    if (params && params.hasOwnProperty("type")) {
+      this.selectArticles(params.type);
+    }
   },
   methods: {
-    selectArticles() {
+    selectArticles(type) {
       const formData = {
-        pageIndex: this.pageIndex,
-        size: this.size,
-        order: "desc"
-      };
+        atc_type: type
+      }
       this.$store
-        .dispatch("article/getOrderByLimit", formData)
+        .dispatch("article/getByObj", formData)
         .then(async res => {
           // 前台文章列表展示一般不会发生变化，所以放在created生命周期里面
           if (res) {
             const { _code, _data } = res;
-            // if (_code === 200) {
-            //   this.articleList = _data;
-            // }
-            if (_data.length < this.size) {
-              this.$message({
-                type: "warning",
-                message: "加载不出来更多的文章了！"
-              });
-              this.loading = false;
-            }
-            if (this.articleList.length > 0) {
-              console.log(`if this.articleList : `, this.articleList);
-              this.articleList = Array.from(this.articleList).concat(
-                Array.from(_data)
-              );
-            } else {
+            if (_code === 200) {
               this.articleList = _data;
             }
-            this.pageIndex++;
           }
         });
     },
@@ -86,22 +71,6 @@ export default {
           this.tagList = _data;
         }
       });
-    },
-    triggerLoading(ele) {
-      let timer = null, // 节流定时器
-        time = 1; // 3s触发一次
-      const intersectionObserver = new IntersectionObserver(entries => {
-        if (entries[0].intersectionRatio <= 0) {
-          return;
-        }
-        if (timer) {
-          clearTimeout(timer);
-        }
-        timer = setTimeout(() => {
-          this.selectArticles()
-        }, time * 1000);
-      });
-      intersectionObserver.observe(ele);
     }
   }
 };

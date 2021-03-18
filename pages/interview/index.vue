@@ -48,15 +48,7 @@
     },
     methods: {
       getList(type) {
-        console.log(`category type : `, type)
-        return this.$nextTick(() => {
-          this.$router.push({
-            path: '/interview/list',
-            query: {
-              type: type
-            }
-          })
-        })
+        this.$router.push('/interview/list/' + type)
       }
     }
   }

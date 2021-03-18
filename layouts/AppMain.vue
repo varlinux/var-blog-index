@@ -14,7 +14,8 @@ export default {
   provide: function() {
     return {
       reload: this.reload,
-      goTo: this.goTo
+      goTo: this.goTo,
+      goBack: this.goBack
     }
   },
   data: function() {
@@ -47,6 +48,9 @@ export default {
     },
     goTo(url) {
       return this.$router.push(url)
+    },
+    goBack(step) {
+      return this.$router.go(step)
     }
   }
 }

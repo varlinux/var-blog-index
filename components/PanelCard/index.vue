@@ -1,6 +1,6 @@
 <template>
   <el-card>
-    <div @click="handleClick">
+    <div class="cursor-p" @click="handleClick">
       <el-image class="bgs-60" :src="currentImg"></el-image>
       <div
         class="article-simple-content display-f flex-direction-c justify-content-sb"
@@ -73,13 +73,7 @@ export default {
   },
   methods: {
     handleClick() {
-      console.log(`click`, this.item);
-      return this.$router.push({
-        path: "/article/detail",
-        query: {
-          atc_id: this.item.atc_id,
-        },
-      });
+      this.$router.push("/article/detail/" + this.item.atc_id);
     },
   },
 };

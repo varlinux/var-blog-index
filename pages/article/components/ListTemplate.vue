@@ -1,8 +1,14 @@
 <template>
   <div class="list-template-container">
-    <slot></slot>
+    <div class="display-f justify-content-sb">
+      <el-button icon="el-icon-d-arrow-left" @click="goBack">返回</el-button>
+      <!-- <el-button @click="reload">
+          <span>刷新</span>
+          <i class="el-icon-refresh-right"></i>
+        </el-button> -->
+    </div>
     <div class="list-template-main">
-      <el-card v-for="item in itemList" :key="item.id">
+      <el-card v-for="item in articleList" :key="item.id">
         <el-image
           class="bgs-60"
           @click="getDetail(item)"
@@ -42,43 +48,34 @@ import ImgConfig from "@/config/ImgConfig";
 
 export default {
   name: "index",
-  props: {
-    itemList: {
-      type: Array,
-      default: [],
-    },
-    loading: {
-      type: Boolean,
-      default: true,
-    },
-  },
+  data: ({
+    articleList: [],
+    tagList: [],
+    loading: true
+  }),
   computed: {
-    publicDate: () => item => DateUtils.autoFormatTimeStamp(item.atc_edit_time || item.atc_create_time)
+    publicDate: () => item =>
+      DateUtils.autoFormatTimeStamp(item.atc_edit_time || item.atc_create_time)
   },
   components: {
-    PanelCard,
+    PanelCard
   },
   watch: {
-    itemList: function () {
+    itemList: function() {
       return this.appendImg(this.itemList);
-    },
+    }
   },
   mounted() {
     this.triggerLoading(document.querySelector(".list-template-loading"));
   },
   methods: {
-    getDetail: function (data) {
-      this.$router.push({
-        path: "/article/detail",
-        query: {
-          atc_id: data.atc_id,
-        },
-      });
+    getDetail: function(data) {
+      this.$router.push("/article/detail/" + data.atc_id);
     },
     appendImg(arr) {
       let imgIsExist,
         imgReg = /!\[.*]\(.*\)/g;
-      arr.forEach((item) => {
+      arr.forEach(item => {
         imgIsExist = item.atc_content.match(imgReg);
         item.first_img = !imgIsExist
           ? ImgConfig.headPortrait
@@ -88,16 +85,15 @@ export default {
             );
         item.simple_content = item.atc_content.replace(imgReg, "");
       });
-      console.log(`this.appendImg : `, arr);
       return arr;
     },
     triggerLoading(ele) {
       let timer = null, // 节流定时器
         time = 3; // 3s触发一次
-      const intersectionObserver = new IntersectionObserver((entries) => {
+      const intersectionObserver = new IntersectionObserver(entries => {
         if (entries[0].intersectionRatio <= 0) {
-          console.log(entries[0].intersectionRatio)
-          return
+          console.log(entries[0].intersectionRatio);
+          return;
         }
         if (timer) {
           clearTimeout(timer);
@@ -107,8 +103,8 @@ export default {
         }, time * 1000);
       });
       intersectionObserver.observe(ele);
-    },
-  },
+    }
+  }
 };
 </script>
 
