@@ -1,7 +1,24 @@
 <template>
   <div class="app-container">
     <div class="justify-content-sb display-f">
-      <h1 class="display-ib">最新文章</h1>
+      <h1 class="display-ib">最近更新</h1>
+      <el-link @click="goTo('/article/list')" :underline="false" target="_blank">
+        <span>更多</span>
+        <i class="el-icon-d-arrow-right"></i>
+      </el-link>
+    </div>
+    <div class="list-content" v-if="articleList.length > 0">
+      <PanelCard
+        v-for="item in articleList"
+        :key="item._id"
+        :tagList="tagList"
+        :item="item"
+        type='update'
+      ></PanelCard>
+    </div>
+    <el-divider content-position="center" class="margin-t-5-b-3">学而时习之</el-divider>
+    <div class="justify-content-sb display-f">
+      <h1 class="display-ib">最近发布</h1>
       <el-link @click="goTo('/article/list')" target="_blank">
         <span>更多</span>
         <i class="el-icon-d-arrow-right"></i>
@@ -13,12 +30,9 @@
         :key="item._id"
         :tagList="tagList"
         :item="item"
+        type='public'
       ></PanelCard>
     </div>
-
-    <!-- <div class="loading-container">
-      <div v-show="loading" ref="loading" class="list-template-loading"></div>
-    </div> -->
   </div>
 </template>
 
@@ -34,7 +48,18 @@ export default {
       tagList: [],
       pageIndex: 0,
       size: 9,
-      loading: true
+      loading: true,
+      // tabList: [{
+      //   title: '最近更新',
+      //   url: '/article/list',
+      //   articleList: this.articleList,
+      //   type: 'update'
+      // },{
+      //   title: '最近发布',
+      //   url: '/article/list',
+      //   articleList: this.articleList,
+      //   type: 'update'
+      // }]
     };
   },
   components: {

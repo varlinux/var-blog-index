@@ -59,27 +59,38 @@ export default class DateUtils {
    * @param {时间戳} date 
    */
   static autoFormatTimeStamp(date) {
-    const nowDate = new Date(),
-          publicDate = new Date(date),
-          units = ['秒', '分', '小时', '天', '个月', '年'],
+    // const nowDate = new Date().getTime(),
+    //       publicDate = new Date(date).getTime(),
+    //       units = [ '年', '个月', '天', '小时', '分' ,'秒'],
+    //       // units = ['秒', '分', '小时', '天', '个月', '年'],
+    //       dateMap = [
+    //         (nowDate - publicDate)/1000,
+    //         nowDate - publicDate,
+    //         nowDate- publicDate,
+    //         nowDate- publicDate,
+    //         nowDate- publicDate,
+    //         nowDate- publicDate,
+    //       ]
+          // dateMap = [
+          //   nowDate.getSeconds() - publicDate.getSeconds(),
+          //   nowDate.getMinutes() - publicDate.getMinutes(),
+          //   nowDate.getHours() - publicDate.getHours(),
+          //   nowDate.getDay() - publicDate.getDay(),
+          //   nowDate.getMonth() - publicDate.getMonth(),
+          //   nowDate.getFullYear() - publicDate.getFullYear()
+          // ]
+    const intervalTime = (new Date().getTime() - new Date(date).getTime())/1000,
+          units = [ '年', '个月', '天', '小时', '分' ,'秒'],
           dateMap = [
-            nowDate.getSeconds() - publicDate.getSeconds(),
-            nowDate.getMinutes() - publicDate.getMinutes(),
-            nowDate.getHours() - publicDate.getHours(),
-            nowDate.getDay() - publicDate.getDay(),
-            nowDate.getMonth() - publicDate.getMonth(),
-            nowDate.getFullYear() - publicDate.getFullYear()
+            intervalTime/60/60/24/30/365,
+            intervalTime/60/60/24/30,
+            intervalTime/60/60/24,
+            intervalTime/60/60,
+            intervalTime/60,
+            intervalTime,
           ]
-    //       index = dateMap.lastIndexOf(item => {
-    //         console.log(item)
-    //         return item > 0
-    //       })
-    // console.log(dateMap, index)
-    // return dateMap[index] + units[index]
-    for (let i = dateMap.length - 1; i > 0; i--) {
-      if(dateMap[i] > 0) {
-        return dateMap[i] + units[i]
-      }
-    }
+    
+    let index = [].slice.call(dateMap).findIndex(item => item >= 1) || 0
+    return String(Math.floor(dateMap[index]) + units[index])
   }
 }

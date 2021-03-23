@@ -1,7 +1,10 @@
 <template>
   <el-card>
     <div class="cursor-p" @click="handleClick">
-      <el-image class="bgs-60" :src="currentImg"></el-image>
+      <el-image 
+        class="bgs-60" 
+        lazy
+        :src="currentImg"></el-image>
       <div
         class="article-simple-content display-f flex-direction-c justify-content-sb"
       >
@@ -18,7 +21,8 @@
           <p class="line-limit-length font-1">{{ item.atc_title }}</p>
           <div class="line-limit-length font-0-6 color-a7a7a7">
             <i class="el-icon-timer"></i>
-            <span>发布于：{{ publicDate }} 前</span>
+            <span v-if="type === 'update'">更新于：{{ updateDate }} 前</span>
+            <span v-else>发布于：{{ publicDate }} 前</span>
           </div>
         </div>
       </div>
@@ -40,6 +44,10 @@ export default {
       type: Array,
       default: [],
     },
+    type: {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     currentTags: function () {
@@ -65,11 +73,13 @@ export default {
       }
     },
     publicDate: function () {
-      // const date = new Date().getTime() - new Date(this.item.atc_edit_time || this.item.atc_create_time).getTime()
+      return DateUtils.autoFormatTimeStamp(this.item.atc_create_time)
+    },
+    updateDate: function () {
       return DateUtils.autoFormatTimeStamp(
         this.item.atc_edit_time || this.item.atc_create_time
       );
-    },
+    }
   },
   methods: {
     handleClick() {

@@ -89,7 +89,11 @@
         this.$store.commit('app/TOGGLE_SIDEBAR')
       },
       toggleSearch() {
-        this.isShowSearchInput = !this.isShowSearchInput
+        this.$message({
+          type: 'warning',
+          message: '该功能暂未开启'
+        })
+        // this.isShowSearchInput = !this.isShowSearchInput
       },
       querySearchAsync() {
 
